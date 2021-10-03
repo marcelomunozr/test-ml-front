@@ -1,33 +1,16 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo, useState, useEffect } from 'react';
 import { connect, useSelector } from 'react-redux';
 import queryString from 'query-string';
 import { useLocation } from 'react-router-dom';
 import { getProductosThunk } from '../actions/resultadoBusqueda';
 import ItemProducto from '../components/ItemProducto';
 
-export const mapStateToProps = (state) => {
-    const {
-        resultado: {
-            products,
-            isLoadingProducts,
-            errorProducts,
-        },
-    } = state;
-    const reduxState = state;
-    return {
-        reduxState,
-        products,
-        isLoadingProducts,
-        errorProducts,
-    };
-};
-
 const ResultadoBusqueda = ({
     dispatch,
 }) => {
-    // const [stateSearchValue, setStateSearchValue] = useState('');
     const { search } = useLocation();
-    const valueSearch = queryString.parse(search).search;
+    const querySearch = queryString.parse(search).search;
+    const [stateSearchValue, setStateSearchValue] = useState(querySearch);
 
     const {
         errorProductos,
@@ -38,29 +21,27 @@ const ResultadoBusqueda = ({
     const handleSetValueSearh = (valueToSearch) => {
         if (valueToSearch) {
             dispatch(getProductosThunk(valueToSearch));
+            setStateSearchValue(valueToSearch);
         }
     };
 
     useEffect(() => {
-        handleSetValueSearh(valueSearch);
+        handleSetValueSearh(stateSearchValue);
         return () => {
-            console.log('saliendo de la pantalla');
+            setStateSearchValue('');
         }
-    }, [valueSearch]);
+    }, [stateSearchValue]);
 
     useEffect(() => {
-        console.log('productos', productos);
-        return () => {
-            console.log('saliendo de la pantalla');
-        }
-    }, [productos]);
+        setStateSearchValue(querySearch);
+    }, [querySearch])
 
     const handleRenderItems = () => {
         const items = productos.map((item) => {
             return <ItemProducto item={item} key={item.id} />;
         });
         return items;
-    }
+    };
 
     const handleRenderContent = () => {
         if (errorProductos) {
@@ -73,16 +54,16 @@ const ResultadoBusqueda = ({
                 <h1>...CARGANDO</h1>
             )
         }
-        return (
-            <div className="container">
-                <div className="wrapper">
-                    {handleRenderItems()}
-                </div>
-            </div>
-        );
+        return handleRenderItems()
     };
 
-    return handleRenderContent();
+    return (
+        <div className="container">
+            <div className="wrapper">
+                {handleRenderContent()}
+            </div>
+        </div>
+    );
 };
 
-export default connect(mapStateToProps)(memo(ResultadoBusqueda));
+export default connect()(memo(ResultadoBusqueda));

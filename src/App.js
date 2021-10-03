@@ -14,10 +14,10 @@ function App() {
             <div className="App">
                 <Header />
                 <Switch>
-                    <Route path="/items">
+                    <Route exact path="/items">
                         <ResultadoBusqueda />
                     </Route>
-                    <Route path="/producto">
+                    <Route exact path="/items/:id">
                         <Producto />
                     </Route>
                 </Switch>

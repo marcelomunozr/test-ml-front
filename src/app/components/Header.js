@@ -14,7 +14,10 @@ const Header = () => {
         setValueField(e.target.value)
     };
 
-    const searchProduct = () => history.push(`/items?search=${valueField}`);
+    const searchProduct = () => {
+        console.log('valueField', valueField);
+        history.push(`/items?search=${valueField}`);
+    }
 
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {

@@ -1,4 +1,4 @@
-import { getProductos } from '../services/resultadoBusqueda';
+import { getProductos } from '../services/products.services';
 import {
 	SET_PRODUCTOS,
 	SET_IS_LOADING_PRODUCTOS,
@@ -32,7 +32,7 @@ const clearAllProductos = () => ({
 
 /**
  * Obtiene productos desde service
- * Seteo de productos en el storage
+ * Guardado de productos en redux state
  */
 const getProductosThunk = (valueToSearch) => async (dispatch) => {
 	dispatch(setErrorProductos(false));
