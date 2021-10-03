@@ -7,14 +7,14 @@ import {
 	CLEAR_ALL_PRODUCTOS,
 } from '../actions/types';
 
-const productosReducers = (state = null, action) => {
+const productosReducers = (state = [], action) => {
 	switch (action.type) {
 		case SET_PRODUCTOS:
-			return action.productOs;
+			return action.productos;
 		case CLEAR_ERROR_PRODUCTOS:
-			return null;
+			return [];
 		case CLEAR_ALL_PRODUCTOS:
-			return null;
+			return [];
 		default:
 			return state;
 	}
@@ -23,7 +23,7 @@ const productosReducers = (state = null, action) => {
 const isLoadingProductosReducers = (state = true, action) => {
 	switch (action.type) {
 		case SET_IS_LOADING_PRODUCTOS:
-			return action.isLoadingProductOs;
+			return action.isLoadingProductos;
 		case CLEAR_ALL_PRODUCTOS:
 			return true;
 		default:
@@ -34,7 +34,7 @@ const isLoadingProductosReducers = (state = true, action) => {
 const errorProductosReducers = (state = false, action) => {
 	switch (action.type) {
 		case SET_ERROR_PRODUCTOS:
-			return action.errorProductOs;
+			return action.errorProductos;
 		case CLEAR_ERROR_PRODUCTOS:
 			return false;
 		case CLEAR_ALL_PRODUCTOS:
@@ -45,7 +45,7 @@ const errorProductosReducers = (state = false, action) => {
 };
 
 export default combineReducers({
-	productOs: productosReducers,
-	isLoadingProductOs: isLoadingProductosReducers,
-	errorProductOs: errorProductosReducers,
+	productos: productosReducers,
+	isLoadingProductos: isLoadingProductosReducers,
+	errorProductos: errorProductosReducers,
 });

@@ -1,4 +1,4 @@
-import { getProductos } from '../services/products';
+import { getProductos } from '../services/resultadoBusqueda';
 import {
 	SET_PRODUCTOS,
 	SET_IS_LOADING_PRODUCTOS,
@@ -7,19 +7,19 @@ import {
 	CLEAR_ALL_PRODUCTOS,
 } from './types';
 
-const setProductos = (products) => ({
+const setProductos = (productos) => ({
 	type: SET_PRODUCTOS,
-	products,
+	productos,
 });
 
-const setIsLoadingProductos = (isLoadingProducts) => ({
+const setIsLoadingProductos = (isLoadingProductos) => ({
 	type: SET_IS_LOADING_PRODUCTOS,
-	isLoadingProducts,
+	isLoadingProductos,
 });
 
-const setErrorProductos = (errorProducts) => ({
+const setErrorProductos = (errorProductos) => ({
 	type: SET_ERROR_PRODUCTOS,
-	errorProducts,
+	errorProductos,
 });
 
 const clearErrorProductos = () => ({
@@ -34,23 +34,21 @@ const clearAllProductos = () => ({
  * Obtiene productos desde service
  * Seteo de productos en el storage
  */
-const getProductosThunk = () => async (dispatch) => {
+const getProductosThunk = (valueToSearch) => async (dispatch) => {
+	dispatch(setErrorProductos(false));
 	dispatch(setIsLoadingProductos(true));
 	try {
-		const response = await getProductos();
-		const {
-			isCancel,
-			data: {amiibo},
-		} = response;
+		const response = await getProductos(valueToSearch);
+		const { data: { items } } = response;
 		if (response.status === 200) {
-			dispatch(setProductos(amiibo));
+			dispatch(setProductos(items));
 		} else {
 			dispatch(setErrorProductos(true));
 		}
 		dispatch(setIsLoadingProductos(false));
-		return isCancel;
 	} catch (error) {
 		console.log('error: ', error);
+		dispatch(setErrorProductos(true));
 	}
 };
 

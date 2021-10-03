@@ -6,7 +6,7 @@ import {
 import Header from "./app/components/Header";
 import ResultadoBusqueda from './app/pages/ResultadoBusqueda'
 import Producto from './app/pages/Producto'
-import "./App.scss";
+import "./app/styles/App.scss";
 
 function App() {
     return (
@@ -14,7 +14,7 @@ function App() {
             <div className="App">
                 <Header />
                 <Switch>
-                    <Route path="/resultado">
+                    <Route path="/items">
                         <ResultadoBusqueda />
                     </Route>
                     <Route path="/producto">
