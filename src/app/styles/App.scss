@@ -6,6 +6,25 @@ $brand: #fff159;
 $white: #fff;
 $gray: #333;
 
+/*
+misc
+*/
+.mb_0 {
+    margin-bottom: 0;
+}
+.mt_0 {
+    margin-top: 0;
+}
+.fs_12 {
+    font-size: 12px;
+}
+.fs_14 {
+    font-size: 14px;
+}
+.fs_62 {
+    font-size: 62px;
+}
+
 *, :after, :before {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -111,7 +130,7 @@ code {
     .wrapper {
         background-color: $white;
         width: 100%;
-        padding: 8px;
+        padding: 8px 16px;
         border-radius: 4px;
         .section-products {
             display: flex;
@@ -140,9 +159,50 @@ code {
                 color: $gray;
             }
         }
+        .single-product {
+            color: $gray;
+            .item-area {
+                width: 100%;
+                display: flex;
+                text-align: left;
+                .left-area {
+                    flex-grow: 1;
+                    min-width: 60%;
+                    padding-right: 16px;
+                }
+                .right-area {
+                    .price {
+                        font-size: 48px;
+                        margin: 0;
+                    }
+                }
+            }
+        }
     }
 }
 
-.App-link {
-    color: #61dafb;
+.ml-button {
+    border-color: transparent;
+    color: #fff;
+    width: 100%;
+    cursor: pointer;
+    -webkit-transition: box-shadow .25s ease-out,background-color .2s ease-out;
+    transition: box-shadow .25s ease-out,background-color .2s ease-out;
+    box-shadow: 0 0 0 0 #fff;
+    font-family: Proxima Nova,-apple-system,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0 24px;
+    height: 48px;
+    text-align: center;
+    border-radius: 6px;
+    -webkit-transition: .18s ease-out;
+    transition: .18s ease-out;
+    display: inline-block;
+    width: auto;
+    -webkit-font-smoothing: antialiased;
+    margin-top: 0;
+    &.primary {
+        background-color: #3483fa;
+    }
 }
