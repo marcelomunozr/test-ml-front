@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import {
     useHistory,
     Link,
 } from "react-router-dom";
+import { connect, useSelector } from 'react-redux';
 import { HiOutlineSearch } from "react-icons/hi";
 import logo from '../../assets/logo__large_plus@2x.png';
 
 const Header = () => {
     const [valueField, setValueField] = useState('');
+    const [categories, setCategories] = useState(null);
     let history = useHistory();
+    const { categorias } = useSelector((state) => state.resultado);
 
     const valueSearch = (e) => {
         setValueField(e.target.value)
@@ -24,13 +27,25 @@ const Header = () => {
         }
     };
 
-    const renderBreadcrums = () => (
+    useEffect(() => {
+       if (categorias) setCategories(categorias);
+    }, [categorias]);
+
+    const renderItemsBreadcrums = () => {
+        console.log('categories', categories);
+        const items = categories.map((categoria) => {
+            return (
+                <li className="breadcrums__item">{categoria.name}</li>
+            );
+        });
+        return items;
+    };
+
+    const renderBreadcrums = () => categories && (
         <div className="breadcrums">
             <ul className="breadcrums__list">
-                <li className="breadcrums__item">1</li>
-                <li className="breadcrums__item">2</li>
-                <li className="breadcrums__item">3</li>
-                <li className="breadcrums__item">4</li>
+                <li className="breadcrums__item">Búsquedas relacionadas</li>
+                {renderItemsBreadcrums()}
             </ul>
         </div>
     );
@@ -67,4 +82,4 @@ const Header = () => {
     )
 }
 
-export default Header;
+export default connect()(memo(Header));

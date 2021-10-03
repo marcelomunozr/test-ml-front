@@ -1,6 +1,7 @@
 import {combineReducers} from 'redux';
 import {
 	SET_PRODUCTOS,
+	SET_CATEGORIAS,
 	SET_IS_LOADING_PRODUCTOS,
 	SET_ERROR_PRODUCTOS,
 	CLEAR_ERROR_PRODUCTOS,
@@ -15,6 +16,14 @@ const productosReducers = (state = [], action) => {
 			return [];
 		case CLEAR_ALL_PRODUCTOS:
 			return [];
+		default:
+			return state;
+	}
+};
+
+const categoriasReducers = (state = [], action) => {
+	switch (action.type) {
+		case SET_CATEGORIAS:
 		default:
 			return state;
 	}
@@ -46,6 +55,7 @@ const errorProductosReducers = (state = false, action) => {
 
 export default combineReducers({
 	productos: productosReducers,
+	categorias: categoriasReducers,
 	isLoadingProductos: isLoadingProductosReducers,
 	errorProductos: errorProductosReducers,
 });

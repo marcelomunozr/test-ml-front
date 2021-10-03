@@ -60,7 +60,7 @@ const Producto = () => {
                         <h1 className="mt_0">{title}</h1>
                         <h4 className="price">${amount.toLocaleString("es-AR")}</h4>
                         <p><strong>Envio gratis: </strong>{envioGratis}</p>
-                        <button type="submit" class="ml-button primary" formaction="https://www.mercadolibre.cl/gz/checkout/buy"><span class="andes-button__content">Comprar ahora</span></button>
+                        <button type="submit" className="ml-button primary">Comprar ahora</button>
                     </div>
                 </div>
                 <div className="item-area">

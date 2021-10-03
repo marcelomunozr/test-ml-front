@@ -125,6 +125,10 @@ code {
                 content: "-";
                 padding: 0 8px;
             }
+            &:last-child:after {
+                content: none;
+                padding: 0 8px;
+            }
         }
     }
     .wrapper {
