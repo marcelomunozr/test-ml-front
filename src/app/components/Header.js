@@ -15,7 +15,6 @@ const Header = () => {
     };
 
     const searchProduct = () => {
-        console.log('valueField', valueField);
         history.push(`/items?search=${valueField}`);
     }
 
