@@ -46,7 +46,7 @@ const ResultadoBusqueda = ({
     const handleRenderContent = () => {
         if (errorProductos) {
             return (
-                <h1>ERROR PRODUCTOS</h1>
+                <h1>Error al obtener productos</h1>
             )
         }
         if (isLoadingProductos) {

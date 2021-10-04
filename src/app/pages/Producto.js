@@ -29,7 +29,7 @@ const Producto = () => {
     const handleRenderContent = () => {
         if (errorData) {
             return (
-                <h1>ERROR PRODUCTOS</h1>
+                <h1>Error al obtener producto</h1>
             )
         }
         if (loading) {
@@ -46,7 +46,6 @@ const Producto = () => {
             sold_quantity,
             description,
         } = productData.item;
-        console.log('productData.item', productData.item);
         const estadoProducto = condition === 'new' ? 'Nuevo' : 'Usado';
         const envioGratis = free_shipping ? 'Sí' : 'No';
         return (

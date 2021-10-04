@@ -28,11 +28,12 @@ const Header = () => {
     };
 
     useEffect(() => {
-       if (categorias) setCategories(categorias);
+       if (categorias.lenght) {
+           console.log('categorias', categorias)
+       }
     }, [categorias]);
 
     const renderItemsBreadcrums = () => {
-        console.log('categories', categories);
         const items = categories.map((categoria) => {
             return (
                 <li className="breadcrums__item">{categoria.name}</li>

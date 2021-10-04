@@ -1,6 +1,7 @@
 import { getProductos } from '../services/products.services';
 import {
 	SET_PRODUCTOS,
+	SET_CATEGORIAS,
 	SET_IS_LOADING_PRODUCTOS,
 	SET_ERROR_PRODUCTOS,
 	CLEAR_ERROR_PRODUCTOS,
@@ -10,6 +11,11 @@ import {
 const setProductos = (productos) => ({
 	type: SET_PRODUCTOS,
 	productos,
+});
+
+const setCategorias = (categorias) => ({
+	type: SET_CATEGORIAS,
+	categorias,
 });
 
 const setIsLoadingProductos = (isLoadingProductos) => ({
@@ -39,9 +45,10 @@ const getProductosThunk = (valueToSearch) => async (dispatch) => {
 	dispatch(setIsLoadingProductos(true));
 	try {
 		const response = await getProductos(valueToSearch);
-		const { data: { items } } = response;
+		const { data: { items, categories } } = response;
 		if (response.status === 200) {
 			dispatch(setProductos(items));
+			dispatch(setCategorias(categories));
 		} else {
 			dispatch(setErrorProductos(true));
 		}
@@ -54,6 +61,7 @@ const getProductosThunk = (valueToSearch) => async (dispatch) => {
 
 export {
 	setProductos,
+	setCategorias,
 	setIsLoadingProductos,
 	setErrorProductos,
 	clearErrorProductos,
