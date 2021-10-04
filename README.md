@@ -3,7 +3,7 @@
 # Instalación
 - `yarn install` Instalar las dependencias
 ## Uso
-- `yarn start` Levantar la aplicación en el puerto
+- `yarn start` Levantar la aplicación en el puerto 3000
 - [http://localhost:3000](http://localhost:3000)
 ## Dependencias
 - axios
