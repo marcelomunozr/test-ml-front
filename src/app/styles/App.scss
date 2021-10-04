@@ -7,22 +7,31 @@ $white: #fff;
 $gray: #333;
 
 /*
-misc
+misc important: para predominar ante otros estilos
 */
 .mb_0 {
-    margin-bottom: 0;
+    margin-bottom: 0!important;
 }
 .mt_0 {
-    margin-top: 0;
+    margin-top: 0!important;
+}
+.pt_0 {
+    padding-top: 0!important;
+}
+.pb_0 {
+    padding-bottom: 0!important;
+}
+.fs_10 {
+    font-size: 10px!important;
 }
 .fs_12 {
-    font-size: 12px;
+    font-size: 12px!important;
 }
 .fs_14 {
-    font-size: 14px;
+    font-size: 14px!important;
 }
 .fs_62 {
-    font-size: 62px;
+    font-size: 62px!important;
 }
 
 *, :after, :before {
@@ -113,7 +122,7 @@ code {
         }
         &__item {
             color: $gray;
-            font-size: 14px;
+            font-size: 12px;
             &:first-child {
                 font-weight: 700;
                 &:after {   

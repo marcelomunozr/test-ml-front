@@ -2,7 +2,7 @@ import React, { memo, useState, useEffect } from 'react';
 import { connect, useSelector } from 'react-redux';
 import queryString from 'query-string';
 import { useLocation } from 'react-router-dom';
-import { getProductosThunk } from '../actions/resultadoBusqueda';
+import { getProductosThunk, setProductos } from '../actions/resultadoBusqueda';
 import ItemProducto from '../components/ItemProducto';
 
 const ResultadoBusqueda = ({
@@ -29,6 +29,7 @@ const ResultadoBusqueda = ({
         handleSetValueSearh(stateSearchValue);
         return () => {
             setStateSearchValue('');
+            dispatch(setProductos([]));
         }
     }, [stateSearchValue]);
 

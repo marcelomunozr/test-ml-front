@@ -47,8 +47,8 @@ const getProductosThunk = (valueToSearch) => async (dispatch) => {
 		const response = await getProductos(valueToSearch);
 		const { data: { items, categories } } = response;
 		if (response.status === 200) {
-			dispatch(setProductos(items));
 			dispatch(setCategorias(categories));
+			dispatch(setProductos(items));
 		} else {
 			dispatch(setErrorProductos(true));
 		}

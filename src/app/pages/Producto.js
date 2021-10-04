@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { setCategorias, setProductos } from '../actions/resultadoBusqueda';
 import { getProducto } from '../services/products.services';
 
 const Producto = () => {
@@ -7,6 +9,7 @@ const Producto = () => {
     const [errorData, setErrorData] = useState(false);
     const [productData, setProductData] = useState(null);
     const { id } = useParams();
+    const dispatch = useDispatch();
 
     const handleGetDataProducto = async () => {
         try {
@@ -24,6 +27,10 @@ const Producto = () => {
 
     useEffect(() => {
         handleGetDataProducto();
+        return () => {
+            dispatch(setCategorias([]));
+            dispatch(setProductos([]));
+        }
     }, []);
 
     const handleRenderContent = () => {

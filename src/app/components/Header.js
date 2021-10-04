@@ -3,13 +3,14 @@ import {
     useHistory,
     Link,
 } from "react-router-dom";
-import { connect, useSelector } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { HiOutlineSearch } from "react-icons/hi";
 import logo from '../../assets/logo__large_plus@2x.png';
+import { setCategorias, setProductos } from '../actions/resultadoBusqueda';
 
 const Header = () => {
     const [valueField, setValueField] = useState('');
-    const [categories, setCategories] = useState(null);
+    const dispatch = useDispatch();
     let history = useHistory();
     const { categorias } = useSelector((state) => state.resultado);
 
@@ -21,42 +22,52 @@ const Header = () => {
         history.push(`/items?search=${valueField}`);
     }
 
+    const clearProducts = () => {
+        dispatch(setCategorias([]));
+        dispatch(setProductos([]));
+    }
+
     const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
+            clearProducts();
             searchProduct();
         }
     };
 
-    useEffect(() => {
-       if (categorias.lenght) {
-           console.log('categorias', categorias)
-       }
-    }, [categorias]);
-
     const renderItemsBreadcrums = () => {
-        const items = categories.map((categoria) => {
-            return (
-                <li className="breadcrums__item">{categoria.name}</li>
+        const items = categorias.map((categoria, index) => {
+            const { id } = categoria;
+            return index < 4 && (
+                <li className="breadcrums__item" key={id}>{categoria.name}</li>
             );
         });
         return items;
     };
 
-    const renderBreadcrums = () => categories && (
-        <div className="breadcrums">
-            <ul className="breadcrums__list">
-                <li className="breadcrums__item">Búsquedas relacionadas</li>
-                {renderItemsBreadcrums()}
-            </ul>
-        </div>
-    );
+    const renderBreadcrums = () => {
+        if (categorias.length) {
+            return (
+                <div className="breadcrums">
+                    <ul className="breadcrums__list">
+                        <li className="breadcrums__item">Búsquedas relacionadas</li>
+                        {renderItemsBreadcrums()}
+                    </ul>
+                </div>
+            );
+        }
+    };
+
+    const goHome = () => {
+        setValueField('');
+        clearProducts();
+    }
 
     return (
         <>
             <header>
                 <div className="container">
                     <div className="logo-area">
-                        <Link to={`/`} onClick={() => setValueField('')}>
+                        <Link to={`/`} onClick={goHome}>
                             <img src={logo} className="logo" alt="logo" />
                         </Link>
                     </div>
@@ -76,7 +87,7 @@ const Header = () => {
                     </div>
                 </div>
             </header>
-            <div className="container">
+            <div className="container pb_0">
                 {renderBreadcrums()}
             </div>
         </>

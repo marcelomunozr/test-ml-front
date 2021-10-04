@@ -24,6 +24,7 @@ const productosReducers = (state = [], action) => {
 const categoriasReducers = (state = [], action) => {
 	switch (action.type) {
 		case SET_CATEGORIAS:
+			return action.categorias;
 		default:
 			return state;
 	}
